@@ -50,7 +50,7 @@ export default {
                     to: [{ type: 'user' }]
                 }
             ],
-            Validition: (Rule) => Rule.unique(),
+            Validition: (Rule) => Rule.unique(), //중복 x
         },
         {
             title: 'Bookmarks',

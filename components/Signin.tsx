@@ -12,6 +12,7 @@ type Props = {
 
 export default function Signin({ providers, callbackUrl }: Props) {
     return (
+        //from NextAuth.
         <>  
             {Object.values(providers).map(({ name, id }) => (
                 <ColorButton

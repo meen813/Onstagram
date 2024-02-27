@@ -14,8 +14,8 @@ export default function Avatar({
     return (
         <div className={getContainerStyle(size, highlight)}>
             <img
-                className={`bg-white object-cover rounded-full p=[0.1rem] ${getImageSizeStyle(size)}`}
-                
+                className={`bg-white object-cover rounded-full p=[0.1rem] 
+                ${getImageSizeStyle(size)}`}
                 src={image ?? undefined}
                 alt="user profile"
                 referrerPolicy="no-referrer" //prevent the x-box issue
@@ -35,6 +35,7 @@ function getContainerStyle(size: string, highlight: boolean): string {
     return `${baseStyle} ${highlightStyle} ${sizeStyle} `;
 };
 
+//white space btw ring and image
 function getImageSizeStyle(size: string): string {
     return size === 'small'
     ? 'w-[34px] p-[0.1rem]' 

@@ -2,6 +2,8 @@ import user from "../../sanity-studio/schemas/user";
 
 export type User = {
     name: string;
+    firstname: string;
+    lastname: string;
     username: string;
     email: string;
     image?: string;

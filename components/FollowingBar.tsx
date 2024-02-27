@@ -8,26 +8,30 @@ import Avatar from './Avatar';
 
 export default function Followingbar() {
     const { data, isLoading: loading, error } = useSWR<DetailUser>('/api/me')
-    const users = data?.following;
+    const users = data?.following && [...data?.following, ...data?.following, ...data?.following]
     console.log(data?.following);
     //plans
-    //1. get the user info from client compenets by making a request to the back-end
-    //2. With session info of a current logged-in user,
-    //3. get the user's info(following) information from Sanity.
-    //4. here, client componet, show the info(username and image) of followings. 
+    //1. get the user(api/me) info from client components by making a request to the back-end
+    //2. With session info of a current logged-in user, (back-end)
+    //3. get the user's info(following) information from Sanity. (back-end)
+    //4. here,(on this page) client componet, show the info(username and image) of followings. 
     return (
-        <div>
+        <div className='w-full flex justify-center item-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto'>
             {loading ? (<BeatLoader size={8} color="#36d7b7" />
             ) : (
                 (!users || users.length === 0) && <p>{`You Do Not Have Any Followings`}</p>
             )}
             {users && users.length > 0 && (
-                <ul>
+                <ul className='w-full flex gap-2'>
                     {users.map(({image, username}) =>
                         <li key={username}>
-                            <Link href={`/user/${username}`}>
+                            <Link
+                                className='flex flex-col items-center w-20'
+                                href={`/user/${username}`}>
                                 <Avatar image={image} highlight />
-                                <p>{username}</p>
+                                <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
+                                    {username}
+                                </p>
                             </Link>
                         </li>)}
                 </ul>

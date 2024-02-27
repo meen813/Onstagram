@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth"
 import { getProviders } from 'next-auth/react';
 import { redirect } from "next/navigation";
 
-
+//Return to the original page after signing in
 type Props = {
     searchParams: {
         callbackUrl: string;

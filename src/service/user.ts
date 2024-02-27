@@ -24,8 +24,9 @@ export async function addUser({ id, username, email, firstname, lastname, image 
     });
 }
 
-export async function getUserByUsername(username: string) {
+export async function getUserByUsername(username: string) { //route.ts
     return client.fetch(
+        //GROQ
         `*[_type == "user" && username == "${username}"][0]{
             ...,
             "id":_id,

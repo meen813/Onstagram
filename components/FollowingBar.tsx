@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import { BeatLoader } from 'react-spinners'
 import Link from 'next/link';
 import Avatar from './Avatar';
+import ScrollableBar from './ui/ScrollableBar';
 
 export default function Followingbar() {
     const { data, isLoading: loading, error } = useSWR<DetailUser>('/api/me')
@@ -22,20 +23,23 @@ export default function Followingbar() {
                 (!users || users.length === 0) && <p>{`You Do Not Have Any Followings`}</p>
             )}
             {users && users.length > 0 && (
-                <ul className='w-full flex gap-2'>
-                    {users.map(({image, username}) =>
-                        <li key={username}>
-                            <Link
-                                className='flex flex-col items-center w-20'
-                                href={`/user/${username}`}>
-                                <Avatar image={image} highlight />
-                                <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
-                                    {username}
-                                </p>
-                            </Link>
-                        </li>)}
-                </ul>
-                )}
+                
+                    <ScrollableBar>
+                        {users.map(({ image, username }) =>
+                            
+                                <Link 
+                                    key={username}
+                                    className='flex flex-col items-center w-20'
+                                    href={`/user/${username}`}>
+                                    <Avatar image={image} highlight />
+                                    <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>
+                                        {username}
+                                    </p>
+                                </Link>
+                            )}
+                    </ScrollableBar>
+                
+            )}
         </div>
     );
 }

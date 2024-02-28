@@ -10,7 +10,7 @@ import ScrollableBar from './ui/ScrollableBar';
 export default function Followingbar() {
     const { data, isLoading: loading, error } = useSWR<DetailUser>('/api/me')
     const users = data?.following && [...data?.following, ...data?.following, ...data?.following]
-    console.log(data?.following);
+    // console.log(data?.following);
     //plans
     //1. get the user(api/me) info from client components by making a request to the back-end
     //2. With session info of a current logged-in user, (back-end)
@@ -26,7 +26,6 @@ export default function Followingbar() {
                 
                     <ScrollableBar>
                         {users.map(({ image, username }) =>
-                            
                                 <Link 
                                     key={username}
                                     className='flex flex-col items-center w-20'

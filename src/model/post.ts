@@ -11,7 +11,7 @@ export type SimplePost = Omit<FullPost, 'comments'> & {
 export type FullPost = {
     username: string;
     userImage: string;
-    image?: string;
+    image: string;
     text: string;
     createdAt: string;
     likes: string[];

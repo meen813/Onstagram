@@ -1,3 +1,5 @@
+'use client'
+
 import { SimplePost } from "@/model/post";
 import Avatar from "./Avatar";
 import Image from 'next/image';
@@ -7,6 +9,9 @@ import { parseDate } from "@/util/date";
 import { useSession } from "next-auth/react";
 import CommentForm from "./CommentForm";
 import ActionBar from "./ActionBar";
+import { useState } from "react";
+import ModalPortal from "./ui/ModalPortal";
+import PostModal from "./PostModal";
 
 
 type Props = {
@@ -15,6 +20,7 @@ type Props = {
 
 export default function PostListCard({ post }: Props) {
     const { username, userImage, image, createdAt, likes, text } = post;
+    const [openModal, setOpenModal] = useState(false);
 
     const { data: session } = useSession();
     const user = session?.user;
@@ -30,9 +36,19 @@ export default function PostListCard({ post }: Props) {
                 alt={`photo by ${username}`}
                 width={500}
                 height={500}
+                onClick={() => setOpenModal(true)}
             />
-            <ActionBar likes={likes} username={username} createdAt={createdAt} text={text}/>
-            <CommentForm authorUsername ={username} />
+            <ActionBar likes={likes} username={username} createdAt={createdAt} text={text} />
+            <CommentForm authorUsername={username} />
+            {
+                openModal && <ModalPortal>
+                    <PostModal onClose={() => setOpenModal(false)}>
+                        <div>
+                            Post Details
+                        </div>
+                    </PostModal>
+                </ModalPortal>
+            }
         </article>
     </>
 }

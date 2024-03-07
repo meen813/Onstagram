@@ -16,7 +16,8 @@ export default function PostModal({onClose, children}: Props) {
     }}>
         <button
             className="fixed top-0 right-0 p-8 text-white"
-            onClick={()=>onClose()}>
+            onClick={()=>onClose()}
+        >
             <CloseIcon/>
         </button>
         {children}

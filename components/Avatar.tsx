@@ -41,3 +41,5 @@ function getImageSizeStyle(size: string): string {
     ? 'w-[34px] p-[0.1rem]' 
     : 'w-16 h-16 p-[0.2rem]';
 };
+
+

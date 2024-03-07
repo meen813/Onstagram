@@ -12,6 +12,7 @@ import ActionBar from "./ActionBar";
 import { useState } from "react";
 import ModalPortal from "./ui/ModalPortal";
 import PostModal from "./PostModal";
+import PostDetail from "./PostDetail";
 
 
 type Props = {
@@ -44,7 +45,7 @@ export default function PostListCard({ post }: Props) {
                 openModal && <ModalPortal>
                     <PostModal onClose={() => setOpenModal(false)}>
                         <div>
-                            Post Details
+                            <PostDetail post={post}/>
                         </div>
                     </PostModal>
                 </ModalPortal>

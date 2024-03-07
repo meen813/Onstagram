@@ -5,7 +5,7 @@ type Props = {
 };
 
 export default function ModalPortal({children}: Props) {
-    if(typeof window === 'undefined') return null;
+    if(typeof window === 'undefined') return null; //make sure this only runs in the client side
 
 
     const node = document.getElementById('portal') as Element;

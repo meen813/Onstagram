@@ -17,7 +17,7 @@ export default function Followingbar() {
     //3. get the user's info(following) information from Sanity. (back-end)
     //4. here,(on this page) client componet, show the info(username and image) of followings. 
     return (
-        <div className='w-full flex justify-center item-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto'>
+        <div className='w-full flex justify-center item-center p-4 shadow-sm shadow-neutral-300 mb-4 rounded-lg min-h-[90px] overflow-x-auto relative z-0'>
             {loading ? (<BeatLoader size={8} color="#36d7b7" />
             ) : (
                 (!users || users.length === 0) && <p>{`You Do Not Have Any Followings`}</p>

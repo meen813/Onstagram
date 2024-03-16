@@ -1,3 +1,4 @@
+import { SimpleUser } from "@/model/user";
 import { client } from "./sanity";
 
 type OAuthUser = {
@@ -37,3 +38,16 @@ export async function getUserByUsername(username: string) { //route.ts
     );
 }
 
+export async function searchUsers(keyword?: string){
+    const query = keyword 
+    ? `&& (name match "${keyword}") || (username match "${keyword}" )`
+    : '';
+    
+    return client.fetch(
+        `*[_type =="user" ${query}]{
+            ...,
+            "following": count(following),
+            "followers": count(followers),
+        }`
+    )
+}

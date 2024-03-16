@@ -8,7 +8,7 @@ import PostListCard from "./postListCard";
 export default function PostList() {
     //since we are actually trying to load an array of posts, the generic type should be SimplePost[].
     const { data: posts, isLoading: loading, error } = useSWR<SimplePost[]>('/api/posts')
-    console.log(posts);
+    // console.log(posts);
 
     return (
         <section>

@@ -1,4 +1,4 @@
-import { SimpleUser } from "@/model/user";
+import { SimpleUser, UserSearchResult } from "@/model/user";
 import { client } from "./sanity";
 
 type OAuthUser = {
@@ -40,14 +40,18 @@ export async function getUserByUsername(username: string) { //route.ts
 
 export async function searchUsers(keyword?: string){
     const query = keyword 
-    ? `&& (name match "${keyword}") || (username match "${keyword}" )`
+    ? `&& (firstname match "${keyword}*^" || lastname match "${keyword}*^" || username match "${keyword}*^")`
     : '';
-    
+
     return client.fetch(
-        `*[_type =="user" ${query}]{
+        `*[_type =="user" ${query}] | {
             ...,
             "following": count(following),
             "followers": count(followers),
         }`
-    )
+    ).then((users)=> users.map((user: UserSearchResult) => ({
+        ...user, 
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+    })))
 }

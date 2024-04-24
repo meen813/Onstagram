@@ -1,5 +1,5 @@
 //show the entire list of all users.
-//no need to login
+//no need to login (no session needed)
 
 import { searchUsers } from "@/service/user";
 import { NextResponse } from "next/server";

@@ -1,7 +1,7 @@
 'use client'
 
 import useDebounce from "@/hooks/useDebounce";
-import { UserSearchResult } from "@/model/user";
+import { SearchUser } from "@/model/user";
 import { FormEvent, useState } from "react"
 import { GridLoader } from "react-spinners";
 import useSWR from "swr"
@@ -19,7 +19,7 @@ export default function UserSearch() {
         data: users,
         isLoading,
         error
-    } = useSWR<UserSearchResult[]>(`/api/search/${debouncedKeyword}`);
+    } = useSWR<SearchUser[]>(`/api/search/${debouncedKeyword}`);
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();

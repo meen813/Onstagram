@@ -1,5 +1,4 @@
 'use client';
-
 import { HomeUser } from '@/model/user';
 import useSWR from 'swr';
 import { BeatLoader } from 'react-spinners'
@@ -9,7 +8,7 @@ import ScrollableBar from './ui/ScrollableBar';
 
 export default function Followingbar() {
     const { data, isLoading: loading, error } = useSWR<HomeUser>('/api/me')
-    const users = data?.following && [...data?.following, ...data?.following, ...data?.following]
+    const users = data?.following && [...data?.following, ...data?.following]
     // console.log(data?.following);
     //plans
     //1. get the user(api/me) info from client components by making a request to the back-end

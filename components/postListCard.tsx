@@ -39,15 +39,14 @@ export default function PostListCard({ post }: Props) {
             />
             <ActionBar likes={likes} username={username} createdAt={createdAt} text={text} />
             <CommentForm authorUsername={username} />
-            {
-                openModal && <ModalPortal>
-                    <PostModal onClose={() => setOpenModal(false)}>
-                        <div>
-                            <PostDetail post={post}/>
-                        </div>
-                    </PostModal>
-                </ModalPortal>
-            }
+            {openModal && (<ModalPortal>
+                <PostModal onClose={() => setOpenModal(false)}>
+                    <div>
+                        <PostDetail post={post} />
+                    </div>
+                </PostModal>
+            </ModalPortal>
+            )}
         </article>
     </>
 }

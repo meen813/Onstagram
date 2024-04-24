@@ -4,6 +4,6 @@ type Props = {
     className?: string;
 };
 
-export default function BookmarkIcon({ className }: Props) {
+export default function PostIcon({ className }: Props) {
     return <RiBookmarkLine className='w-6 h-6' />;
 }

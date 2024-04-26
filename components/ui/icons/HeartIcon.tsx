@@ -5,5 +5,5 @@ type Props = {
 };
 
 export default function HeartIcon({ className }: Props) {
-    return <AiOutlineHeart className='w-7 h-7' />;
+    return <AiOutlineHeart className={className || 'w-7 h-7'} />;
 }

@@ -1,9 +1,10 @@
-import { RiBookmarkLine } from 'react-icons/ri';
+import React from 'react';
+import { MdGridOn } from 'react-icons/md';
 
 type Props = {
     className?: string;
 };
 
 export default function PostIcon({ className }: Props) {
-    return <RiBookmarkLine className='w-6 h-6' />;
+  return <MdGridOn className={className || 'w-7 h-7'} />;
 }

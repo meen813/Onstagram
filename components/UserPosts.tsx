@@ -10,7 +10,7 @@ type Props = {
     user: ProfileUser;
 }
 const tabs = [
-    { type: 'posts', icon: <PostIcon /> },
+    { type: 'posts', icon: <PostIcon className='w-3 h-3' /> },
     { type: 'liked', icon: <HeartIcon className='w-3 h-3' /> },
     { type: 'saved', icon: <BookmarkIcon className='w-3 h-3' /> }
 ]
@@ -31,7 +31,7 @@ export function UserPosts({ user: { username } }: Props) {
                         key={type}
                         onClick={() => setQuery(type)
                         }>
-                        <button className="scale-150 md:sacle-100">{icon}</button>
+                        <button className="scale-150 md:scale-100">{icon}</button>
                         <span className="hidden md:inline">{type}</span>
                     </li>)}
             </ul>

@@ -44,7 +44,7 @@ export async function searchUsers(keyword?: string){
     : '';
 
     return client.fetch(
-        `*[_type =="user" ${query}] | order(_updatedAt desc)  {
+        `*[_type =="user" ${query}] {
             ...,
             "following": count(following),
             "followers": count(followers),

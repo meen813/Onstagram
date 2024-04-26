@@ -67,9 +67,9 @@ export async function getLikedPostOF(username: string) {
 
 export async function getSavedPostOF(username: string) {
     return client.fetch(
-        `*[_type == "post" && _id in *[_type=="user && username=="${username}"].bookmarks[]._ref] 
+        `*[_type == "post" && _id in *[_type=="user" && username=="${username}"].bookmarks[]._ref] 
         | order(_createdAt desc) {
             ${simplePostProjection}
         }`
     ).then(mapPosts);
-}
+}   

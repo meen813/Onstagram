@@ -72,4 +72,22 @@ export async function getSavedPostOF(username: string) {
             ${simplePostProjection}
         }`
     ).then(mapPosts);
-}   
+}
+
+export async function likePost(postId: string, userId: string) {
+    return client.patch(postId)
+        .setIfMissing({ likes: [] })
+        .append('likes', [
+            {
+                _ref: userId,
+                _type: 'reference'
+            }
+        ])
+        .commit({ autoGenerateArrayKeys: true })
+}
+
+export async function unlikePost(postId: string, userId: string) {
+    return client.patch(postId)
+        .unset([`likes[_ref=="${userId}"]`])
+        .commit();
+}

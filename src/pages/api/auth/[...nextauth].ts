@@ -28,17 +28,24 @@ export const authOptions: NextAuthOptions = {
       });
       return true;
     },
-    async session({ session }) {
+    async session({ session, token }) {
       // console.log(session);
       const user = session?.user;
       if (user) {
         session.user = {
           ...user,
           username: user.email?.split('@')[0] || '',
+          id: token.id as string,
         };
       }
       return session;
     },
+    async jwt({token, user}){
+      if(user) {
+        token.id = user.id;
+      }
+      return token;
+    }
   },
   pages: {
     signIn: '/auth/signin',

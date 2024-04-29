@@ -1,13 +1,11 @@
 'use client';
-
-import { SimplePost } from "@/model/post";
+import usePosts from "@/hooks/posts";
 import { DotLoader } from "react-spinners";
-import useSWR from "swr";
 import PostListCard from "./postListCard";
 
 export default function PostList() {
     //since we are actually trying to load an array of posts, the generic type should be SimplePost[].
-    const { data: posts, isLoading: loading, error } = useSWR<SimplePost[]>('/api/posts')
+    const { posts, isLoading: loading, error } = usePosts();
     // console.log(posts);
 
     return (

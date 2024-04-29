@@ -23,9 +23,8 @@ type Props = {
 export default function PostListCard({ post }: Props) {
     const { username, userImage, image, createdAt, likes, text } = post;
     const [openModal, setOpenModal] = useState(false);
-
-    const { data: session } = useSession();
-    const user = session?.user;
+    // const { data: session } = useSession();
+    // const user = session?.user;
     return <>
         <article className="rounded-lg shadow-md border border-gray-300">
             <PostUserAvatar image={userImage} username={username} />
@@ -37,7 +36,7 @@ export default function PostListCard({ post }: Props) {
                 height={500}
                 onClick={() => setOpenModal(true)}
             />
-            <ActionBar likes={likes} username={username} createdAt={createdAt} text={text} />
+            <ActionBar post={post} />
             <CommentForm authorUsername={username} />
             {openModal && (<ModalPortal>
                 <PostModal onClose={() => setOpenModal(false)}>

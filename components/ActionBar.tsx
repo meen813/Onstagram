@@ -3,7 +3,6 @@ import { SimplePost } from "@/model/post";
 import { parseDate } from "@/util/date";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useSWRConfig } from "swr";
 import BookmarkFillIcon from "./ui/icons/BookmarkFillIcon";
 import BookmarkIcon from "./ui/icons/BookmarkIcon";
 import HeartFillIcon from "./ui/icons/HeartFillIcon";
@@ -20,7 +19,6 @@ export default function ActionBar({post}: Props) {
     const user = session?.user;
     const liked = user ? likes.includes(user.username) : false;
     const [bookmarked, setBookmarked] = useState(false);
-   
     const {setLike} = usePosts();
     const handleLike = (like: boolean) => {
         if(user) {

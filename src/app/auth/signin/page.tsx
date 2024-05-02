@@ -1,4 +1,4 @@
-import Signin from "../../../../components/Signin";
+import Signin from "../../../components/Signin";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth"
 import { getProviders } from 'next-auth/react';

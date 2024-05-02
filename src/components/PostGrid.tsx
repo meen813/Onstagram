@@ -19,9 +19,11 @@ export default function PostGrid({ username, query }: Props) {
         <div className="w-full text-center">
             {isLoading && "Now Loading"}
             <ul className="grid grid-cols-3 gap-4 py-4 px-8">
-                {posts && posts.map((post, index) => <li key={post.id}>
-                    <PostGridCard post={post} priority={index < 6} />
-                </li>)}
+                {posts && posts.map((post, index) => (
+                    <li key={post.id}>
+                        <PostGridCard post={post} priority={index < 6} />
+                    </li>
+                ))}
             </ul>
         </div>
     );

@@ -81,7 +81,7 @@ export async function addBookmark(userId: string, postId: string) { //userId has
             {
                 _ref: postId,
                 _type: 'reference'
-            }
+            },
         ])
         .commit({ autoGenerateArrayKeys: true })
 }

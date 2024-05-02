@@ -27,7 +27,8 @@ export default function PostGridCard({ post, priority = false }: Props) {
                 className="object-cover"
                 src={image}
                 alt={`photo by ${username}`}
-                fill sizes='650px'
+                fill 
+                sizes='650px'
                 priority={priority}
                 onClick={handleOpenPost}
             />

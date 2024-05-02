@@ -10,7 +10,7 @@ import NewIcon from "./ui/icons/NewIcon";
 import SearchFillIcon from "./ui/icons/SearchFillIcon";
 import SearchIcon from "./ui/icons/SearchIcon";
 import { useSession, signIn, signOut } from "next-auth/react"
-import user from "../sanity-studio/schemas/user";
+import user from "../../sanity-studio/schemas/user";
 import Avatar from "./Avatar";
 
 

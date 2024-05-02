@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import UserSearch from "../../../components/UserSearch";
+import UserSearch from "../../components/UserSearch";
 
 export const dynamic = 'force-dynamic';
 

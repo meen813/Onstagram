@@ -13,21 +13,30 @@ const simplePostProjection = `
     "createdAt":_createdAt
 `;
 
+function mapPosts(posts: SimplePost[]) {
+  return posts.map((post: SimplePost) => ({
+    ...post,
+    likes: post.likes ?? [],
+    image: urlFor(post.image),
+  }));
+}
+
+
 export async function getFollowingPostsOf(username: string) {
-    return client
-        .fetch(
-            `*[_type =="post" && author->username == "${username}"
+  return client
+    .fetch(
+      `*[_type =="post" && author->username == "${username}"
         || author._ref in *[_type == "user" && username == "${username}"].following[]._ref]
         | order(_createdAt desc){
         ${simplePostProjection}
         }`
-        )
-        .then(mapPosts);
+    )
+    .then(mapPosts);
 }
 
 export async function getPost(id: string) {
-    return client.fetch(
-        `*[_type == "post" && _id == "${id}"][0]{
+  return client.fetch(
+    `*[_type == "post" && _id == "${id}"][0]{
             ...,
             "username": author->username,
             "userImage": author->image,
@@ -37,59 +46,66 @@ export async function getPost(id: string) {
             "id":_id,
             "createdAt":_createdAt
         }`
-    ).then((post) => ({ ...post, image: urlFor(post.image) }));
+  ).then((post) => ({ ...post, image: urlFor(post.image) }));
 }
 
 export async function getPostsOF(username: string) {
-    return client.fetch(
-        `*[_type == "post" && author->username == "${username}"] 
+  return client.fetch(
+    `*[_type == "post" && author->username == "${username}"] 
         |  {
             ${simplePostProjection}
         }`
-    ).then(mapPosts);
+  ).then(mapPosts);
 }
 
 export async function getLikedPostOF(username: string) {
-    return client.fetch(
-        `*[_type == "post" && "${username}" in likes[]->username] 
+  return client.fetch(
+    `*[_type == "post" && "${username}" in likes[]->username] 
         | order(_createdAt desc) {
             ${simplePostProjection}
         }`
-    ).then(mapPosts);
+  ).then(mapPosts);
 }
 
 export async function getSavedPostOF(username: string) {
-    return client.fetch(
-        `*[_type == "post" && _id in *[_type=="user" && username=="${username}"].bookmarks[]._ref] 
+  return client
+    .fetch(
+      `*[_type == "post" && _id in *[_type=="user" && username=="${username}"].bookmarks[]._ref] 
         | order(_createdAt desc) {
             ${simplePostProjection}
         }`
     ).then(mapPosts);
 }
 
-function mapPosts(posts: SimplePost[]) {
-    return posts.map((post: SimplePost) => ({
-        ...post,
-        likes: post.likes ?? [], 
-        image: urlFor(post.image),
-    }));
-}
-
-
 export async function likePost(postId: string, userId: string) {
-    return client.patch(postId)
-        .setIfMissing({ likes: [] })
-        .append('likes', [
-            {
-                _ref: userId,
-                _type: 'reference'
-            }
-        ])
-        .commit({ autoGenerateArrayKeys: true })
+  return client
+    .patch(postId)
+    .setIfMissing({ likes: [] })
+    .append('likes', [
+      {
+        _ref: userId,
+        _type: 'reference'
+      }
+    ])
+    .commit({ autoGenerateArrayKeys: true })
 }
 
 export async function unlikePost(postId: string, userId: string) {
-    return client.patch(postId)
-        .unset([`likes[_ref=="${userId}"]`])
-        .commit();
+  return client
+    .patch(postId)
+    .unset([`likes[_ref=="${userId}"]`])
+    .commit();
+}
+
+export async function addComment(postId: string, userId: string, comment: string) {
+  return client
+    .patch(postId)
+    .setIfMissing({ comments: [] })
+    .append('comments', [
+      {
+        comment,
+        author: {_ref: userId, _type: 'reference' },
+      },
+    ])
+    .commit({ autoGenerateArrayKeys: true })
 }

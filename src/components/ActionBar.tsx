@@ -19,7 +19,6 @@ export default function ActionBar({post}: Props) {
 
     const liked = user ? likes.includes(user.username) : false;
     const bookmarked = user?.bookmarks.includes(id) ?? false;
-    console.log(bookmarked);
 
     const handleLike = (like: boolean) => {
         user && setLike(post, user.username, like)

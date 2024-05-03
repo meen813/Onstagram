@@ -16,11 +16,7 @@ const tabs = [
 ]
 
 export function UserPosts({ user: { username } }: Props) {
-    //api/users/${username}/posts
-    //api/users/${username}/liked
-    //api/users/${username}/bookmarks
     const [query, setQuery] = useState(tabs[0].type);
-    // const { data: posts, isLoading, error } = useSWR(`/api/users/${username}/${query}`)
 
     return (
         <section>

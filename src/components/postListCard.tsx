@@ -18,6 +18,7 @@ import PostUserAvatar from "./PostUserAvatar";
 
 type Props = {
     post: SimplePost;
+    priority?: boolean;
 };
 
 export default function PostListCard({ post }: Props) {

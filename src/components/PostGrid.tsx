@@ -1,5 +1,4 @@
 import { SimplePost } from "@/model/post";
-import { DotLoader } from "react-spinners";
 import useSWR from "swr";
 import PostGridCard from "./PostGridCard";
 

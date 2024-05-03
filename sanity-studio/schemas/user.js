@@ -38,7 +38,7 @@ export default {
                     to: [{ type: 'user' }]
                 }
             ],
-            Validition: (Rule) => Rule.unique(),
+            validition: (Rule) => Rule.unique(),
         },
         {
             title: 'Followers',
@@ -50,7 +50,7 @@ export default {
                     to: [{ type: 'user' }]
                 }
             ],
-            Validition: (Rule) => Rule.unique(), //중복 x
+            validition: (Rule) => Rule.unique(), //중복 x
         },
         {
             title: 'Bookmarks',

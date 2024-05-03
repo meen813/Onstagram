@@ -1,5 +1,3 @@
-import user from "../../sanity-studio/schemas/user";
-
 export type AuthUser = {
     id: string;
     name: string;
@@ -10,7 +8,7 @@ export type AuthUser = {
     image?: string;
 };
 
-export type SimpleUser = Pick<AuthUser,'id'| 'username' | 'image'>;
+export type SimpleUser = Pick<AuthUser,'username' | 'image'>;
 
 export type HomeUser = AuthUser & {
     following: SimpleUser[];

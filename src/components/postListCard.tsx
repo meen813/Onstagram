@@ -14,6 +14,7 @@ import ModalPortal from "./ui/ModalPortal";
 import PostModal from "./PostModal";
 import PostDetail from "./PostDetail";
 import PostUserAvatar from "./PostUserAvatar";
+import usePosts from "@/hooks/posts";
 
 
 type Props = {
@@ -24,6 +25,10 @@ type Props = {
 export default function PostListCard({ post }: Props) {
   const { username, userImage, image, comments, text } = post;
   const [openModal, setOpenModal] = useState(false);
+  const { postComment } = usePosts();
+  const handlePostComment = (comment: string) => {
+    postComment(post, comment)
+  };
   return <>
     <article className="rounded-lg shadow-md border border-gray-300">
       <PostUserAvatar image={userImage} username={username} />
@@ -44,7 +49,7 @@ export default function PostListCard({ post }: Props) {
           className=" my-2 text-neutral-600"
           onClick={() => setOpenModal(true)}>{`view all ${comments} comments`}</button>}
       </ActionBar>
-      <CommentForm authorUsername={username} />
+      <CommentForm onPostComment={handlePostComment} authorUsername={username} />
       {openModal && (<ModalPortal>
         <PostModal onClose={() => setOpenModal(false)}>
           <div>

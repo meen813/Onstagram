@@ -13,8 +13,8 @@ export default function CommentForm({ authorUsername, onPostComment }: Props) {
     const buttonDisabled = comment.length === 0;
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        onPostComment(comment);
-        setComment('');
+            onPostComment(comment);
+            setComment('');
     };
     const { data: session } = useSession();
     const user = session?.user;

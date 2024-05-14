@@ -103,9 +103,9 @@ export async function follow(myId: string, targetId: string) {
         .append('following', [{ _ref: targetId, _type: 'reference' }])
     )
     .patch(targetId, (user) =>
-    user
+      user
       .setIfMissing({ followers: [] })
-      .append('following', [{ _ref: myId, _type: 'reference' }])
+      .append('followers', [{ _ref: myId, _type: 'reference' }])
   )
   .commit({ autoGenerateArrayKeys: true });
 }
@@ -115,6 +115,6 @@ export async function unfollow(myId: string, targetId: string) {
   return client
     .transaction()
     .patch(myId, (user) => user.unset([`following[_ref=="${targetId}"]`]))
-    .patch(targetId, (user) => user.unset([`following[_ref=="${myId}"]`]))
-  .commit({ autoGenerateArrayKeys: true });
+    .patch(targetId, (user) => user.unset([`followers[_ref=="${myId}"]`]))
+    .commit({ autoGenerateArrayKeys: true });
 }

@@ -3,7 +3,6 @@
 import useDebounce from "@/hooks/useDebounce";
 import { SearchUser } from "@/model/user";
 import { FormEvent, useState } from "react"
-import { GridLoader } from "react-spinners";
 import useSWR from "swr"
 import UserCard from "./UserCard";
 

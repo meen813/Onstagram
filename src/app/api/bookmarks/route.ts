@@ -1,5 +1,4 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { likePost, unlikePost } from "@/service/posts";
 import { addBookmark, removeBookmark } from "@/service/user";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";

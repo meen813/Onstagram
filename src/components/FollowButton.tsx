@@ -1,25 +1,48 @@
 'use client';
 import useMe from "@/hooks/me";
 import { ProfileUser } from "@/model/user";
+import { useRouter } from "next/navigation";
+
+import { useState, useTransition } from "react";
 import Button from "./ui/Button";
 
 type Props = {
-    user: ProfileUser;
+  user: ProfileUser;
 }
 
-export default function FollowButton({user}: Props) { //this 'user' is the target user I want to follow
-    const {username} = user;
-    const {user: loggedInUser, toggleFollow} = useMe(); //this is you
+export default function FollowButton({ user }: Props) { //this 'user' is the target user I want to follow
+  const { username } = user;
+  const { user: loggedInUser, toggleFollow } = useMe(); //this is you
 
-    const showButton = loggedInUser && loggedInUser.username !== username;
-    const following = loggedInUser && loggedInUser.following.find((item) => item.username === username)
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [isFetching, setIsFetching] = useState(false);
+  const isUpdating = isPending || isFetching;
 
-    const followingText = following ? "Unfollow" : "Follow";
+  const showButton = loggedInUser && loggedInUser.username !== username;
+  const following = loggedInUser && loggedInUser.following.find((item) => item.username === username)
 
-    const hanldeFollow = () => {
-        toggleFollow(user.id, !following);
-    }
-    return<>
-        {showButton && <Button text={followingText} onClick={hanldeFollow} red={followingText === 'Unfollow'}/>}
-    </>;
+  const followingText = following ? "Unfollow" : "Follow";
+
+  const hanldeFollow = async () => {
+    setIsFetching(true);
+    await toggleFollow(user.id, !following);
+    setIsFetching(false);
+    startTransition(() => {
+      router.refresh();
+    });
+  }
+  return (
+    <>
+      {showButton && (
+        <div>
+          {isUpdating && <p>Now Loading...</p>}
+          <Button
+            text={followingText}
+            onClick={hanldeFollow}
+            red={followingText === 'Unfollow'} />
+        </div>
+      )}
+    </>
+  )
 }

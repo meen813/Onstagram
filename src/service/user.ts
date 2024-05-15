@@ -64,11 +64,14 @@ export async function getUserForProfile(username: string) {
         "following": count(following),
         "followers": count(followers),
         "posts": count(*[_type=="post" && author->username == "${username}"])
-        }`
+        }`, undefined,
+    {
+      cache: 'no-store'
+    }
   ).then(user => ({
     ...user,
     following: user.following ?? 0,
-    followers: user.following ?? 0,
+    followers: user.followers ?? 0,
     posts: user.posts ?? 0,
   }));
 }
@@ -104,10 +107,10 @@ export async function follow(myId: string, targetId: string) {
     )
     .patch(targetId, (user) =>
       user
-      .setIfMissing({ followers: [] })
-      .append('followers', [{ _ref: myId, _type: 'reference' }])
-  )
-  .commit({ autoGenerateArrayKeys: true });
+        .setIfMissing({ followers: [] })
+        .append('followers', [{ _ref: myId, _type: 'reference' }])
+    )
+    .commit({ autoGenerateArrayKeys: true });
 }
 
 //unfollow function

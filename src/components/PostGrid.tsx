@@ -1,5 +1,4 @@
-import { SimplePost } from "@/model/post";
-import useSWR from "swr";
+import usePosts from "@/hooks/posts";
 import PostGridCard from "./PostGridCard";
 
 type Props = {
@@ -7,12 +6,12 @@ type Props = {
     query: string;
 }
 
-export default function PostGrid({ username, query }: Props) {
+export default function PostGrid() {
     const {
-        data: posts,
+        posts,
         isLoading,
         error
-    } = useSWR<SimplePost[]>(`/api/users/${username}/${query}`)
+    } = usePosts();
 
     return (
         <div className="w-full text-center">

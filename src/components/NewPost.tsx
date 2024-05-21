@@ -12,15 +12,15 @@ type Props = {
 export default function NewPost({ user: { username, image } }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>()
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setDragging(false);
     const files = e.target?.files;
-    if (files && files[0]) {
+    if(files && files[0]) {
       setFile(files[0]);
-      console.log(files[0])
     }
-  };
+  }
   const handleDrag = (e: React.DragEvent) => {
     if (e.type === 'dragenter') {
       setDragging(true);
@@ -35,9 +35,8 @@ export default function NewPost({ user: { username, image } }: Props) {
     e.preventDefault();
     setDragging(false);
     const files = e.dataTransfer?.files;
-    if (files && files[0]) {
+    if(files && files[0]) {
       setFile(files[0]);
-      console.log(files[0])
     }
   }
 

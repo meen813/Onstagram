@@ -1,7 +1,8 @@
 'use client'
 import { AuthUser } from "@/model/user";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import PostUserAvatar from "./PostUserAvatar";
 import Button from "./ui/Button";
 import FileIcons from "./ui/icons/FileIcons";
@@ -12,12 +13,16 @@ type Props = {
 export default function NewPost({ user: { username, image } }: Props) {
   const [dragging, setDragging] = useState(false);
   const [file, setFile] = useState<File>()
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<String>();
+  const router = useRouter();
 
+  const textRef = useRef<HTMLTextAreaElement>(null)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setDragging(false);
     const files = e.target?.files;
-    if(files && files[0]) {
+    if (files && files[0]) {
       setFile(files[0]);
     }
   }
@@ -35,15 +40,47 @@ export default function NewPost({ user: { username, image } }: Props) {
     e.preventDefault();
     setDragging(false);
     const files = e.dataTransfer?.files;
-    if(files && files[0]) {
+    if (files && files[0]) {
       setFile(files[0]);
     }
+  }
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!file) return;
+
+    setLoading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('text', textRef.current?.value ?? "");
+
+    fetch('/api/posts/', { method: 'POST', body: formData })
+      .then((res) => {
+        if (!res.ok) {
+          setError(`${res.status} ${res.statusText}`);
+          return;
+        }
+        router.push('/');
+      })
+      .catch(err => setError(err.toString()))
+      .finally(() => setLoading(false))
   }
 
   return (
     <section className="w-full max-w-xl flex flex-col items-center mt-7">
+      {loading && (
+        <div className="absolute inset-0 z-20 text-center pt-[30%]">
+          <p>Loading...</p>
+        </div>)
+      }
+      {
+        error && (
+          <p className="w-full bg-red-100 text-red-600 text-center font-bold p-4">
+            {error}
+          </p>
+        )
+      }
       <PostUserAvatar username={username} image={image ?? ''} />
-      <form className="w-full flex flex-col mt-3 gap-3">
+      <form className="w-full flex flex-col mt-3 gap-3" onSubmit={handleSubmit}>
         <input
           type="file"
           className="hidden"
@@ -84,10 +121,13 @@ export default function NewPost({ user: { username, image } }: Props) {
           name="text"
           id="input-text"
           required rows={10}
-          placeholder={'Comment Here...'}>
+          placeholder={'Comment Here...'}
+          ref={textRef}
+        >
         </textarea>
+        <Button text='Create Your Post' onClick={() => { }}></Button>
       </form>
-      <Button text='Create Your Post' onClick={() => { }}></Button>
+      
     </section>
   )
 }

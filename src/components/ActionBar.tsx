@@ -19,7 +19,7 @@ export default function ActionBar({post, children, onComment }: Props) {
     const { user, setBookmark } = useMe();
     const {setLike} = usePosts();
     const liked = user ? likes.includes(user.username) : false;
-    const bookmarked = user?.bookmarks.includes(id) ?? false;
+    const bookmarked = user?.bookmarks ? user.bookmarks.includes(id) : false;
 
 
     const handleLike = (like: boolean) => {

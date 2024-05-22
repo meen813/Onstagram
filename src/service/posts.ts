@@ -104,8 +104,30 @@ export async function addComment(postId: string, userId: string, comment: string
     .append('comments', [
       {
         comment,
-        author: {_ref: userId, _type: 'reference' },
+        author: { _ref: userId, _type: 'reference' },
       },
     ])
     .commit({ autoGenerateArrayKeys: true })
+}
+
+export async function createNewPost(userId: string, text: string, file: Blob) {
+  return client.assets //
+    .upload('image', file)
+    .then((result) => {
+      return client.create(
+        {
+          _type: 'post',
+          author: { _ref: userId },
+          photo: { asset: { _ref: result._id } },
+          comments: [
+            {
+              comment: text,
+              author: { _ref: userId, _type: 'reference' },
+            },
+          ],
+          likes: [],
+        },
+        { autoGenerateArrayKeys: true }
+      );
+    });
 }

@@ -27,7 +27,7 @@ export default function useMe() {
     const setBookmark = useCallback(
         (postId: string, bookmark: boolean) => {
             if(!user) return;
-            const bookmarks = user.bookmarks;
+            const bookmarks = user.bookmarks || [];
             const newUser = {
                 ...user,
                 bookmarks: bookmark 

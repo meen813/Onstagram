@@ -8,3 +8,19 @@ body {
   height: 100vh;
   overflow-x: hidden;
 }
+
+/* Dark Mode */
+:root {
+  --color-bg: #ffffff;
+  --color-text: #000000;
+}
+
+.dark {
+  --color-bg: #1a202c;
+  --color-text: #ffffff;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

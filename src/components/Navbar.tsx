@@ -9,10 +9,9 @@ import NewFillIcon from "./ui/icons/NewFillIcon";
 import NewIcon from "./ui/icons/NewIcon";
 import SearchFillIcon from "./ui/icons/SearchFillIcon";
 import SearchIcon from "./ui/icons/SearchIcon";
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react";
 import Avatar from "./Avatar";
-
-
+import ThemeToggle from "./ThemeToggle";
 
 const menu = [
   {
@@ -31,15 +30,16 @@ const menu = [
     clickedIcon: <NewFillIcon />,
   },
 ];
+
 export default function Navbar() {
   const pathName = usePathname();
   const { data: session } = useSession();
   const user = session?.user;
 
   return (
-    <div className='flex justify-between items-center px-6'>
+    <div className='flex justify-between items-center px-6 bg-white dark:bg-neutral-800 border-b dark:border-neutral-700'>
       <Link href='/'>
-        <h1 className='text-3xl font-bold'>Onstagram</h1>
+        <h1 className='text-3xl font-bold text-black dark:text-white'>Onstagram</h1>
       </Link>
       <nav>
         <ul className='flex gap-4 items-center p-4'>
@@ -50,6 +50,9 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
+          <li>
+            <ThemeToggle />
+          </li>
           {user && (
             <li>
               <Link href={`/user/${user.username}`}>

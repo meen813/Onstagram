@@ -10,17 +10,19 @@ const simplePostProjection = `
     "text": comments[0].comment,
     "comments": count(comments),
     "id":_id,
-    "createdAt":_createdAt
+    "createdAt":_createdAt,
+    "deleted": deleted 
 `;
 
 function mapPosts(posts: SimplePost[]) {
-  return posts.map((post: SimplePost) => ({
-    ...post,
-    likes: post.likes ?? [],
-    image: urlFor(post.image),
-  }));
+  return posts
+    .filter((post) => !post.deleted)
+    .map((post: SimplePost) => ({
+      ...post,
+      likes: post.likes ?? [],
+      image: urlFor(post.image),
+    }));
 }
-
 
 export async function getFollowingPostsOf(username: string) {
   return client
@@ -130,4 +132,18 @@ export async function createNewPost(userId: string, text: string, file: Blob) {
         { autoGenerateArrayKeys: true }
       );
     });
+}
+
+export async function softDeletePostById(postId: string) {
+  try {
+    await client
+      .patch(postId)
+      .set({ deleted: true })
+      .commit();
+    console.log('Post soft deleted successfully');
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to soft delete post', error);
+    throw new Error('Failed to soft delete post');
+  }
 }

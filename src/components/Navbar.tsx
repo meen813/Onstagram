@@ -37,7 +37,7 @@ export default function Navbar() {
   const user = session?.user;
 
   return (
-    <div className='flex justify-between items-center px-6 bg-white dark:bg-neutral-800 border-b dark:border-neutral-700'>
+    <div className='flex justify-between items-center px-6 bg-white dark:bg-neutral-900 border-b dark:border-neutral-700'>
       <Link href='/'>
         <h1 className='text-3xl font-bold text-black dark:text-white'>Onstagram</h1>
       </Link>

@@ -24,7 +24,7 @@ export default function PostListCard({ post }: Props) {
     postComment(post, comment)
   };
   return <>
-    <article className="rounded-lg shadow-md border border-gray-300">
+    <article className="rounded-lg shadow-md border border-gray-300 dark:bg-neutral-900">
       <PostUserAvatar image={userImage} username={username} />
       <Image
         className="w-full object-cover aspect-square"

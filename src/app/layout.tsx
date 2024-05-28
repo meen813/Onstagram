@@ -22,11 +22,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={openSans.className}>
-      <body className='w-full bg-neutral-50 dark:bg-neutral-900 dark:text-white overflow-auto'>
+      <body className='w-full bg-neutral-50 dark:bg-black dark:text-white overflow-auto'>
         <AuthContext>
           <header className='sticky top-0 z-10'>
             <div className='max-w-screen-xl mx-auto'>
-              <Navbar />
+              <Navbar/>
             </div>
           </header>
           <main className='w-full flex justify-center max-w-screen-xl mx-auto'>

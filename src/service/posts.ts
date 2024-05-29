@@ -51,7 +51,7 @@ export async function getPost(id: string) {
   ).then((post) => ({ ...post, image: urlFor(post.image) }));
 }
 
-export async function getPostsOF(username: string) {
+export async function getPostsOf(username: string) {
   return client.fetch(
     `*[_type == "post" && author->username == "${username}"] 
         |  {
@@ -60,7 +60,7 @@ export async function getPostsOF(username: string) {
   ).then(mapPosts);
 }
 
-export async function getLikedPostOF(username: string) {
+export async function getLikedPostOf(username: string) {
   return client.fetch(
     `*[_type == "post" && "${username}" in likes[]->username] 
         | order(_createdAt desc) {

@@ -25,7 +25,7 @@ export default function useFullPost(postId: string) {
     if(!post) return;
     const newPost = {
       ...post,
-      comments: [...post.comments, comment],
+      comments: [...(post.comments || []), comment],
     };
     
     return mutate(addComment(post.id, comment.comment), {

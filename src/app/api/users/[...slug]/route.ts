@@ -1,4 +1,4 @@
-import { getLikedPostOF, getPostsOF, getSavedPostOF } from "@/service/posts";
+import { getLikedPostOf, getPostsOf, getSavedPostOF } from "@/service/posts";
 import { NextRequest, NextResponse } from "next/server";
 import user from "../../../../../sanity-studio/schemas/user";
 
@@ -17,9 +17,9 @@ export async function GET(_: NextRequest, context: Context) {
 
     const [username, query] = slug;
 
-    let request = getPostsOF;
+    let request = getPostsOf;
     if (query === 'liked') {
-        request = getLikedPostOF;
+        request = getLikedPostOf;
     } else if (query === 'saved') {
         request = getSavedPostOF;
     }

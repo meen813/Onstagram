@@ -15,7 +15,7 @@ export async function GET() {
     .then((data) => NextResponse.json(data));
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   const user = session?.user;
 
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     return new Response('Authentication Error', { status: 401 });
   }
 
-  const form = await req.formData();
+  const form = await request.formData();
   const text = form.get('text')?.toString();
   const file = form.get('file') as Blob;
 

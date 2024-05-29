@@ -3,7 +3,6 @@ import { AuthUser } from "@/model/user";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
-import PostUserAvatar from "./PostUserAvatar";
 import Button from "./ui/Button";
 import FileIcons from "./ui/icons/FileIcons";
 
@@ -16,7 +15,6 @@ export default function NewPost({ user: { username, image } }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<String>();
   const router = useRouter();
-
   const textRef = useRef<HTMLTextAreaElement>(null)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -79,7 +77,6 @@ export default function NewPost({ user: { username, image } }: Props) {
           </p>
         )
       }
-      <PostUserAvatar username={username} image={image ?? ''} />
       <form className="w-full flex flex-col mt-3 gap-3" onSubmit={handleSubmit}>
         <input
           type="file"
@@ -90,18 +87,18 @@ export default function NewPost({ user: { username, image } }: Props) {
           onChange={handleChange}
         />
         <label
-          className={`w-full h-60 flex flex-col items-center justify-center gap-4 ${!file && ' border-2 border-teal-500 border-dashed'}`}
+          className={`w-full h-60 flex flex-col items-center justify-center gap-4 ${!file && ' border-2 border-teal-500 border-dashed'} `}
           htmlFor="input-upload"
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
-          {dragging && (<div className="absolute inset-0 z-10 bg-teal-500/20 pointer-events-none" />)}
+          {dragging && (<div className="absolute inset-0 z-10 bg-neutral-900/20 pointer-events-none" />)}
           {!file && (
             <div>
               <FileIcons />
-              <p>Upload Your Image or Video File By Drag or Click here</p>
+              <p className="mt-3">Upload Your Image By Drag or Click here</p>
             </div>
           )}
           {file && (
@@ -117,7 +114,7 @@ export default function NewPost({ user: { username, image } }: Props) {
           )}
         </label>
         <textarea
-          className="outline-none text-lg border border-neutral-300 p-2 mb-2"
+          className="outline-none text-lg border border-neutral-300 p-3 mb-2 dark:bg-neutral-900"
           name="text"
           id="input-text"
           required rows={10}
@@ -127,7 +124,7 @@ export default function NewPost({ user: { username, image } }: Props) {
         </textarea>
         <Button text='Create Your Post' onClick={() => { }}></Button>
       </form>
-      
+
     </section>
   )
 }

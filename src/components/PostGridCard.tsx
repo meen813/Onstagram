@@ -22,7 +22,7 @@ export default function PostGridCard({ post, priority = false }: Props) {
         setOpenModal(true);
     }
     return (
-        <div className="relative w-full aspect-square">
+        <div className="relative w-full aspect-square border border-teal-700">
             <Image
                 className="object-cover"
                 src={image}

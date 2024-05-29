@@ -30,7 +30,7 @@ export default function UserSearch() {
                 className="w-full mb-4"
                 onSubmit={onSubmit}>
                 <input
-                    className="w-full text-xl p-3 outline-none border border-grey-400 dark:bg-neutral-900"
+                    className="w-full text-xl p-3 outline-none border border-grey-400 bg-light-beige dark:bg-neutral-900"
                     type="text"
                     autoFocus
                     placeholder="Search for a username of name"

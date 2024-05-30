@@ -1,25 +1,19 @@
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { likePost, unlikePost } from "@/service/posts";
-import { getServerSession } from "next-auth";
+import { withSessionUser } from "@/util/session";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(req: NextRequest) {
-  const session = await getServerSession(authOptions);
-  const user = session?.user;
-
-  if (!user) {
-    return new Response('Authentication Error', { status: 401 });
-  }
-
-  const { id, like } = await req.json();
+  return withSessionUser(async(user) => {
+    const { id, like } = await req.json();
   
-  if (!id || like === undefined) {
-    return new Response('Bad Response', { status: 400 });
-  }
-
-  const request = like ? likePost : unlikePost;
-
-  return request(id, user.id)
-    .then(res => NextResponse.json(res))
-    .catch((error) => new Response(JSON.stringify(error), { status: 500 })) //internal error
+    if (!id || like == null) {
+      return new Response('Bad Response', { status: 400 });
+    }
+  
+    const request = like ? likePost : unlikePost;
+  
+    return request(id, user.id)
+      .then(res => NextResponse.json(res))
+      .catch((error) => new Response(JSON.stringify(error), { status: 500 })) //internal error
+  })
 }

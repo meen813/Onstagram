@@ -33,7 +33,7 @@ export default function ThemeToggle() {
     return (
         <button
             onClick={toggleTheme}
-            className="p-2 ml-4 text-black dark:text-white"
+            className="p-2 ml-4 text-black dark:text-white transition duration-300 ease-in-out transform hover:-translate-y-0.5"
         >
             {isDarkMode ? <LightModeIcon/> : <DarkmodeIcon/>}
         </button>

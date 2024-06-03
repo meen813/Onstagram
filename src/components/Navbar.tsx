@@ -44,7 +44,7 @@ export default function Navbar() {
       <nav className="w-full sm:w-auto">
         <ul className='flex gap-4 items-center md:p-4 sm:p-1 justify-between'>
           {menu.map((item) => (
-            <li key={item.href}>
+            <li key={item.href} className="transition duration-300 ease-in-out transform hover:-translate-y-0.5">
               <Link href={item.href}>
                 {pathName === item.href ? item.clickedIcon : item.icon}
               </Link>

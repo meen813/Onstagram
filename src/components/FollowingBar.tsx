@@ -20,7 +20,7 @@ export default function Followingbar() {
                         {users.map(({ image, username }) =>
                                 <Link 
                                     key={username}
-                                    className='flex flex-col items-center w-20'
+                                    className='flex flex-col items-center w-20 transition duration-300 ease-in-out transform hover:-translate-y-0.5'
                                     href={`/user/${username}`}>
                                     <Avatar image={image} highlight />
                                     <p className='w-full text-sm text-center text-ellipsis overflow-hidden'>

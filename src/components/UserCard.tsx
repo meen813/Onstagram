@@ -11,7 +11,7 @@ export default function UserCard({ user: { firstname, lastname, username, image,
 
     return (
         <Link
-            className="flex items-center w-full rounded-sm border border-neutral-300 mb-2 p-3 bg-light-beige hover:bg-natrual-50 dark:bg-neutral-900"
+            className="flex items-center w-full rounded-sm border border-neutral-300 mb-2 p-3 bg-light-beige hover:bg-natrual-50 dark:bg-neutral-900 dark:hover:bg-black  hover:bg-gray-200 transition duration-300 ease-in-out transform hover:-translate-y-1"
             href={`/user/${username}`}>
             <Avatar image={image} />
             <div className="text-neutral-500 ml-3 dark:text-white">

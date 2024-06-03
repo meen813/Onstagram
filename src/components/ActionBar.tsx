@@ -14,10 +14,10 @@ type Props = {
     children?: React.ReactNode;
     onComment: (comment: Comment) => void;
 }
-export default function ActionBar({post, children, onComment }: Props) {
+export default function ActionBar({ post, children, onComment }: Props) {
     const { id, createdAt, likes } = post;
     const { user, setBookmark } = useMe();
-    const {setLike} = usePosts();
+    const { setLike } = usePosts();
     const liked = user ? likes.includes(user.username) : false;
     const bookmarked = user?.bookmarks ? user.bookmarks.includes(id) : false;
 
@@ -31,26 +31,29 @@ export default function ActionBar({post, children, onComment }: Props) {
     }
 
     const handleComment = (comment: string) => {
-        user && onComment({comment, username: user.username, image: user.image })
+        user && onComment({ comment, username: user.username, image: user.image })
     }
-    
-    
+
+
     return (
         <>
-            <div className="flex justify-between my-2 px-4">
-                <ToggleButton 
-                    toggled={liked} 
-                    onToggle={handleLike} 
-                    onIcon={<HeartFillIcon/>} 
-                    offIcon={<HeartIcon/>}
-                />
-                <ToggleButton 
-                    toggled={bookmarked} 
-                    onToggle={handleBookmark} 
-                    onIcon={<BookmarkFillIcon/>} 
-                    offIcon={<BookmarkIcon />}
-                />
-                
+            <div className="flex justify-between my-2 px-4 ">
+                <div className="transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                    <ToggleButton
+                        toggled={liked}
+                        onToggle={handleLike}
+                        onIcon={<HeartFillIcon />}
+                        offIcon={<HeartIcon />}
+                    />
+                </div>
+                <div className="transition duration-300 ease-in-out transform hover:-translate-y-0.5">
+                    <ToggleButton
+                        toggled={bookmarked}
+                        onToggle={handleBookmark}
+                        onIcon={<BookmarkFillIcon />}
+                        offIcon={<BookmarkIcon />}
+                    />
+                </div>
             </div>
             <div className="px-4 py-1">
                 <p className="text-sm font-bold mb-2">{`${likes?.length ?? 0} ${likes?.length > 1 ? 'likes' : 'like'}`}</p>

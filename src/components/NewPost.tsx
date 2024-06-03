@@ -102,9 +102,9 @@ export default function NewPost({ user: { username, image } }: Props) {
             </div>
           )}
           {file && (
-            <div className="relative w-full aspect-square">
+            <div className="relative w-full h-full flex items-center justify-center">
               <Image
-                className="object-cover"
+                className="object-cover max-h-full"
                 src={URL.createObjectURL(file)}
                 alt='local file'
                 fill

@@ -87,7 +87,7 @@ export default function NewPost({ user: { username, image } }: Props) {
           onChange={handleChange}
         />
         <label
-          className={`w-full h-60 flex flex-col items-center justify-center gap-4 ${!file && ' border-2 border-teal-500 border-dashed'} `}
+          className={`w-full h-60 sm:h-80 flex flex-col items-center justify-center gap-4 ${!file && ' border-2 border-teal-500 border-dashed'} `}
           htmlFor="input-upload"
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}

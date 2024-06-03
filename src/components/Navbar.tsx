@@ -37,12 +37,12 @@ export default function Navbar() {
   const user = session?.user;
 
   return (
-    <div className='flex justify-between items-center px-6 bg-light-beige dark:bg-neutral-900 border-b dark:border-neutral-700'>
+    <div className='flex flex-col sm:flex-row justify-between items-center px-6 bg-light-beige dark:bg-neutral-900 border-b dark:border-neutral-700'>
       <Link href='/'>
         <h1 className='text-3xl font-bold text-black dark:text-white'>Onstagram</h1>
       </Link>
-      <nav>
-        <ul className='flex gap-4 items-center p-4'>
+      <nav className="w-full sm:w-auto">
+        <ul className='flex gap-4 items-center md:p-4 sm:p-1 justify-between'>
           {menu.map((item) => (
             <li key={item.href}>
               <Link href={item.href}>

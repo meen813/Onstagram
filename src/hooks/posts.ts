@@ -19,7 +19,7 @@ async function addComment(id: string, comment: string) {
 
 export default function usePosts() {
     const cacheKeys = useCachekeys();
-    console.log(cacheKeys)
+    // console.log(cacheKeys)
     const {
         data: posts,
         isLoading,

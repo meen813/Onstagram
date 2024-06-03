@@ -45,17 +45,17 @@ export default function PostDetail({ post }: Props) {
 	};
 
 	return (
-		<section className="flex w-full h-full">
-			<div className="relative basis-3/5">
+		<section className="flex flex-col sm:flex-row w-full h-full">
+			<div className="relative w-full sm:w-3/5 h-60 sm:h-auto">
 				<Image
 					className="object-cover"
 					src={image}
 					alt={`photo by ${username}`}
 					priority
 					fill
-					sizes="650px" />
+					sizes="(max-width: 640px) 100vw, 50vw" />
 			</div>
-			<div className="w-full basis-2/5 flex flex-col">
+			<div className="w-full sm:w-2/5 flex flex-col h-full">
 				<PostUserAvatar image={userImage} username={username} />
 				<ul className="border-t border-gray-300 h-full overflow-y-auto p-4 mb-1">
 					{comments && comments.map(({ image, username: commentUsername, comment }, index) =>

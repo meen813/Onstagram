@@ -1,6 +1,5 @@
 import { getLikedPostOf, getPostsOf, getSavedPostOF } from "@/service/posts";
 import { NextRequest, NextResponse } from "next/server";
-import user from "../../../../../sanity-studio/schemas/user";
 
 type Context = {
     params: {

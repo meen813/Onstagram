@@ -80,7 +80,7 @@ export default function PostDetail({ post }: Props) {
 				{currentUser === username && (
 					<button
 						onClick={handleDelete}
-						className="bg-red-500 text-white fixed top-2 left-2 p-3 rounded mt-2 transition duration-300 ease-in-out hover:bg-red-600 shadow-md hover:shadow-lg">
+						className="bg-red-500 text-white fixed top-5 left-5 p-3 rounded mt-2 transition duration-300 ease-in-out hover:bg-red-600 shadow-md hover:shadow-lg">
 						<DeleteIcon />
 					</button>
 				)}

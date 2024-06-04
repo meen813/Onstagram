@@ -15,7 +15,7 @@ export default function PostModal({ onClose, children }: Props) {
 				}
 			}}>
 			<button
-				className="fixed top-0 right-0 p-8 text-white"
+				className="fixed top-0 right-0 p-8 text-white transition duration-300 ease-in-out hover:text-gray-300 transform hover:-translate-y-0.5"
 				onClick={() => onClose()}
 			>
 				<CloseIcon />

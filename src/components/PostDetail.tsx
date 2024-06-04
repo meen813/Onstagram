@@ -59,12 +59,14 @@ export default function PostDetail({ post }: Props) {
 				<PostUserAvatar image={userImage} username={username} />
 				<ul className="border-t border-gray-300 h-full overflow-y-auto p-4 mb-1">
 					{comments && comments.map(({ image, username: commentUsername, comment }, index) =>
-						<li key={index} className='flex items-center mb-1'>
-							<Avatar
-								image={image}
-								size='small'
-								highlight={commentUsername === username}
-							/>
+						<li key={index} className='flex items-start mb-1'>
+							<div className="flex-shrink-0">
+								<Avatar
+									image={image}
+									size='small'
+									highlight={commentUsername === username}
+								/>
+							</div>
 							<div className="ml-2">
 								<span className="font-bold mr-1">{commentUsername}</span>
 								<span>{comment}</span>
@@ -79,7 +81,7 @@ export default function PostDetail({ post }: Props) {
 					<button
 						onClick={handleDelete}
 						className="bg-red-500 text-white py-1 px-2 rounded mt-2 text-sm transition duration-300 ease-in-out hover:bg-red-600 shadow-md hover:shadow-lg">
-						<DeleteIcon/>
+						<DeleteIcon />
 					</button>
 				)}
 			</div>
